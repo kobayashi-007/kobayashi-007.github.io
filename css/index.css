@@ -5750,6 +5750,134 @@ body[data-type='about'] #web_bg {
  {
   body: 1;
 }
+.author-content-item .card-bluearchive {
+  position: absolute;
+  width: 900px;
+  height: 298px;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+.author-content-item.game-bluearchive {
+  background-size: cover;
+  min-height: 300px;
+  overflow: hidden;
+  color: var(--anzhiyu-white);
+  width: 50%;
+}
+.author-content-item.game-bluearchive::after {
+  -webkit-box-shadow: 0 -69px 203px 11px #575d8b inset;
+  box-shadow: 0 -69px 203px 11px #575d8b inset;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.author-content-item.game-bluearchive .content-bottom {
+  padding-bottom: 10px;
+}
+.author-content-item.game-bluearchive .game-bluearchive-uid {
+  display: block;
+}
+.loading-bluearchive {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 62.5px;
+  -webkit-transform: translate(-25%, -50%) scale(0.5);
+  -moz-transform: translate(-25%, -50%) scale(0.5);
+  -o-transform: translate(-25%, -50%) scale(0.5);
+  -ms-transform: translate(-25%, -50%) scale(0.5);
+  transform: translate(-25%, -50%) scale(0.5);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+.loading-bluearchive::after {
+  content: '';
+  position: absolute;
+  top: 500px;
+  left: 0;
+  filter: drop-shadow(0 -500px 0 var(--loadingbar-prospect-color));
+  width: 500px;
+  height: 62.5px;
+  background: url("https://yuanshen.site/imgs/loading-bar.png") no-repeat left 100%;
+  background-size: 500px 62.5px;
+  background-position-x: 0;
+}
+.author-content-item.game-bluearchive:hover .loading-bluearchive::after {
+  -webkit-animation: loading-bluearchive 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite forwards;
+  -moz-animation: loading-bluearchive 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite forwards;
+  -o-animation: loading-bluearchive 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite forwards;
+  -ms-animation: loading-bluearchive 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite forwards;
+  animation: loading-bluearchive 3.5s cubic-bezier(0.28, 0.11, 0.32, 1) infinite forwards;
+}
+@media screen and (max-width: 719px) {
+  .loading-bluearchive .loading-bluearchive {
+    display: none;
+  }
+}
+@media screen and (max-width: 719px) and (orientation: landscape) {
+  .loading-bluearchive .loading-bluearchive {
+    display: block !important;
+    -webkit-transform: translate(-50%, -50%) scale(0.7) !important;
+    -moz-transform: translate(-50%, -50%) scale(0.7) !important;
+    -o-transform: translate(-50%, -50%) scale(0.7) !important;
+    -ms-transform: translate(-50%, -50%) scale(0.7) !important;
+    transform: translate(-50%, -50%) scale(0.7) !important;
+  }
+}
+@supports not (filter: drop-shadow(0 0 0 #fff)) {
+  .loading-bluearchive:before {
+    content: 'Your browser does not support the animation';
+  }
+}
+.author-content-item.comic-contents {
+  width: 48%;
+  min-height: 300px;
+  overflow: hidden;
+}
+.author-content-item.comic-contents .comic-boxs {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 @-moz-keyframes loading-bar {
   0% {
     width: 0;
@@ -5904,6 +6032,210 @@ body[data-type='about'] #web_bg {
   }
 }
 @keyframes loading-bar {
+  0% {
+    width: 0;
+    background-size: 500px 62.5px;
+  }
+  83% {
+    width: 475px;
+  }
+  83.1% {
+    width: 475px;
+  }
+  83.2% {
+    width: 475px;
+  }
+  83.3% {
+    width: 475px;
+  }
+  83.4% {
+    width: 475px;
+  }
+  83.5% {
+    width: 475px;
+  }
+  83.6% {
+    width: 475px;
+  }
+  83.7% {
+    width: 475px;
+  }
+  83.8% {
+    width: 475px;
+  }
+  83.9% {
+    width: 475px;
+  }
+  84% {
+    width: 475px;
+  }
+  85% {
+    width: 475px;
+  }
+  86% {
+    width: 475px;
+  }
+  87% {
+    width: 475px;
+  }
+  100% {
+    width: 500px;
+  }
+}
+@-moz-keyframes loading-bluearchive {
+  0% {
+    width: 0;
+    background-size: 500px 62.5px;
+  }
+  83% {
+    width: 475px;
+  }
+  83.1% {
+    width: 475px;
+  }
+  83.2% {
+    width: 475px;
+  }
+  83.3% {
+    width: 475px;
+  }
+  83.4% {
+    width: 475px;
+  }
+  83.5% {
+    width: 475px;
+  }
+  83.6% {
+    width: 475px;
+  }
+  83.7% {
+    width: 475px;
+  }
+  83.8% {
+    width: 475px;
+  }
+  83.9% {
+    width: 475px;
+  }
+  84% {
+    width: 475px;
+  }
+  85% {
+    width: 475px;
+  }
+  86% {
+    width: 475px;
+  }
+  87% {
+    width: 475px;
+  }
+  100% {
+    width: 500px;
+  }
+}
+@-webkit-keyframes loading-bluearchive {
+  0% {
+    width: 0;
+    background-size: 500px 62.5px;
+  }
+  83% {
+    width: 475px;
+  }
+  83.1% {
+    width: 475px;
+  }
+  83.2% {
+    width: 475px;
+  }
+  83.3% {
+    width: 475px;
+  }
+  83.4% {
+    width: 475px;
+  }
+  83.5% {
+    width: 475px;
+  }
+  83.6% {
+    width: 475px;
+  }
+  83.7% {
+    width: 475px;
+  }
+  83.8% {
+    width: 475px;
+  }
+  83.9% {
+    width: 475px;
+  }
+  84% {
+    width: 475px;
+  }
+  85% {
+    width: 475px;
+  }
+  86% {
+    width: 475px;
+  }
+  87% {
+    width: 475px;
+  }
+  100% {
+    width: 500px;
+  }
+}
+@-o-keyframes loading-bluearchive {
+  0% {
+    width: 0;
+    background-size: 500px 62.5px;
+  }
+  83% {
+    width: 475px;
+  }
+  83.1% {
+    width: 475px;
+  }
+  83.2% {
+    width: 475px;
+  }
+  83.3% {
+    width: 475px;
+  }
+  83.4% {
+    width: 475px;
+  }
+  83.5% {
+    width: 475px;
+  }
+  83.6% {
+    width: 475px;
+  }
+  83.7% {
+    width: 475px;
+  }
+  83.8% {
+    width: 475px;
+  }
+  83.9% {
+    width: 475px;
+  }
+  84% {
+    width: 475px;
+  }
+  85% {
+    width: 475px;
+  }
+  86% {
+    width: 475px;
+  }
+  87% {
+    width: 475px;
+  }
+  100% {
+    width: 500px;
+  }
+}
+@keyframes loading-bluearchive {
   0% {
     width: 0;
     background-size: 500px 62.5px;
