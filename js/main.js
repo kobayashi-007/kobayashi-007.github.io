@@ -1,3 +1,76 @@
+// 动态创建语言切换按钮
+function createLangSwitcher() {
+  var navRight = document.querySelector('#nav-right');
+  if (!navRight) return;
+  
+  var existingSwitcher = document.querySelector('#lang-switcher');
+  if (existingSwitcher) return;
+  
+  var langSwitcher = document.createElement('div');
+  langSwitcher.className = 'nav-button lang-button';
+  langSwitcher.id = 'lang-switcher';
+  
+  var langButton = document.createElement('a');
+  langButton.className = 'site-page';
+  langButton.href = 'javascript:void(0);';
+  langButton.title = '语言 Language';
+  langButton.onclick = toggleLangMenu;
+  
+  var icon = document.createElement('i');
+  icon.className = 'anzhiyufont anzhiyu-icon-language';
+  langButton.appendChild(icon);
+  langSwitcher.appendChild(langButton);
+  
+  var menuGroups = document.createElement('div');
+  menuGroups.className = 'back-menu-list-groups';
+  
+  var menuGroup = document.createElement('div');
+  menuGroup.className = 'back-menu-list-group';
+  
+  var menuTitle = document.createElement('div');
+  menuTitle.className = 'back-menu-list-title';
+  menuTitle.textContent = '语言 Language';
+  menuGroup.appendChild(menuTitle);
+  
+  var menuList = document.createElement('div');
+  menuList.className = 'back-menu-list lang-list';
+  
+  var langList = ['zh', 'hk', 'en', 'ja', 'ko', 'fr', 'ru'];
+  var langNames = { 'zh':'简体中文','hk':'繁體中文','en':'English','ja':'日本語','ko':'한국어','fr':'Français','ru':'Русский' };
+  var langGlyph = { 'zh':'简','hk':'繁','en':'EN','ja':'日','ko':'韩','fr':'FR','ru':'RU' };
+  
+  langList.forEach(function(lang) {
+    var item = document.createElement('a');
+    item.className = 'back-menu-item lang-item';
+    item.href = 'javascript:void(0);';
+    item.title = langNames[lang] || lang;
+    item.onclick = function() { switchLang(lang); };
+    
+    var badge = document.createElement('span');
+    badge.className = 'lang-badge';
+    badge.textContent = langGlyph[lang] || '🌐';
+    item.appendChild(badge);
+    
+    var text = document.createElement('span');
+    text.className = 'back-menu-item-text';
+    text.textContent = langNames[lang] || lang;
+    item.appendChild(text);
+    
+    menuList.appendChild(item);
+  });
+  
+  menuGroup.appendChild(menuList);
+  menuGroups.appendChild(menuGroup);
+  langSwitcher.appendChild(menuGroups);
+  
+  navRight.insertBefore(langSwitcher, navRight.firstChild);
+}
+
+// 页面加载完成后创建语言切换按钮
+document.addEventListener('DOMContentLoaded', function() {
+  createLangSwitcher();
+});
+
 // 第一次播放音乐
 var anzhiyu_musicFirst = false;
 // 快捷键
@@ -1851,43 +1924,19 @@ function toggleLangMenu() {
 }
 
 function switchLang(lang) {
-  const langMap = {
-    'zh': '',
-    'zh-CN': '',
-    'hk': '/hk',
-    'en': '/en',
-    'ja': '/ja',
-    'ko': '/ko',
-    'fr': '/fr',
-    'ru': '/ru',
+  const langUrls = {
+    'zh': 'https://blog.187322.xyz/',
+    'zh-CN': 'https://blog.187322.xyz/',
+    'hk': 'https://blog.187322.xyz/hk/',
+    'en': 'https://blog.187322.xyz/en/',
+    'ja': 'https://blog.187322.xyz/ja/',
+    'ko': 'https://blog.187322.xyz/ko/',
+    'fr': 'https://blog.187322.xyz/fr/',
+    'ru': 'https://blog.187322.xyz/ru/',
   };
 
-  const path = langMap[lang] || '';
-  const currentPath = window.location.pathname;
-  
-  let newPath = currentPath;
-  const langPrefixes = ['/en', '/ja', '/ko', '/fr', '/ru', '/hk'];
-  
-  let hasPrefix = false;
-  for (const prefix of langPrefixes) {
-    if (currentPath.startsWith(prefix)) {
-      newPath = currentPath.substring(prefix.length);
-      hasPrefix = true;
-      break;
-    }
-  }
-
-  if (!hasPrefix && currentPath !== '/' && path) {
-    newPath = path + currentPath;
-  } else if (path) {
-    newPath = path + newPath;
-  }
-
-  if (newPath === '') {
-    newPath = '/';
-  }
-
-  window.location.href = window.location.origin + newPath;
+  const url = langUrls[lang] || 'https://blog.187322.xyz/';
+  window.location.href = url;
 }
 
 document.addEventListener('click', function(e) {
