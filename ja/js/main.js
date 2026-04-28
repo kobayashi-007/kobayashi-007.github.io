@@ -1924,19 +1924,18 @@ function toggleLangMenu() {
 }
 
 function switchLang(lang) {
-  const langUrls = {
+  const langMap = {
     'zh': 'https://blog.187322.xyz/',
     'zh-CN': 'https://blog.187322.xyz/',
     'hk': 'https://blog.187322.xyz/hk/',
     'en': 'https://blog.187322.xyz/en/',
     'ja': 'https://blog.187322.xyz/ja/',
-    'ko': 'https://blog.187322.xyz/ko/',
-    'fr': 'https://blog.187322.xyz/fr/',
-    'ru': 'https://blog.187322.xyz/ru/',
   };
 
-  const url = langUrls[lang] || 'https://blog.187322.xyz/';
-  window.location.href = url;
+  const targetUrl = langMap[lang] || '';
+  if (targetUrl) {
+    window.location.href = targetUrl;
+  }
 }
 
 document.addEventListener('click', function(e) {
