@@ -1,14 +1,14 @@
 
 // 浏览器语言自动检测和跳转脚本
 (function() {
-    // 定义语言映射表
+    // 定义语言映射表（统一不带尾斜杠）
     var langMap = {
-        'zh': 'https://blog.187322.xyz/',
-        'zh-CN': 'https://blog.187322.xyz/',
-        'zh-HK': 'https://blog.187322.xyz/hk/',
-        'zh-TW': 'https://blog.187322.xyz/hk/',
-        'en': 'https://blog.187322.xyz/en/',
-        'ja': 'https://blog.187322.xyz/ja/'
+        'zh': 'https://blog.187322.xyz',
+        'zh-CN': 'https://blog.187322.xyz',
+        'zh-HK': 'https://blog.187322.xyz/hk',
+        'zh-TW': 'https://blog.187322.xyz/hk',
+        'en': 'https://blog.187322.xyz/en',
+        'ja': 'https://blog.187322.xyz/ja'
     };
 
     // 本地存储键名

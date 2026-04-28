@@ -1925,11 +1925,11 @@ function toggleLangMenu() {
 
 function switchLang(lang) {
   const langMap = {
-    'zh': 'https://blog.187322.xyz/',
-    'zh-CN': 'https://blog.187322.xyz/',
-    'hk': 'https://blog.187322.xyz/hk/',
-    'en': 'https://blog.187322.xyz/en/',
-    'ja': 'https://blog.187322.xyz/ja/',
+    'zh': 'https://blog.187322.xyz',
+    'zh-CN': 'https://blog.187322.xyz',
+    'hk': 'https://blog.187322.xyz/hk',
+    'en': 'https://blog.187322.xyz/en',
+    'ja': 'https://blog.187322.xyz/ja',
   };
 
   const targetUrl = langMap[lang] || '';
