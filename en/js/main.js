@@ -35,9 +35,9 @@ function createLangSwitcher() {
   var menuList = document.createElement('div');
   menuList.className = 'back-menu-list lang-list';
   
-  var langList = ['zh', 'hk', 'en', 'ja', 'ko', 'fr', 'ru'];
-  var langNames = { 'zh':'简体中文','hk':'繁體中文','en':'English','ja':'日本語','ko':'한국어','fr':'Français','ru':'Русский' };
-  var langGlyph = { 'zh':'简','hk':'繁','en':'EN','ja':'日','ko':'韩','fr':'FR','ru':'RU' };
+  var langList = ['zh', 'hk', 'en', 'ja'];
+  var langNames = { 'zh':'简体中文','hk':'繁體中文','en':'English','ja':'日本語' };
+  var langGlyph = { 'zh':'简','hk':'繁','en':'EN','ja':'日' };
   
   langList.forEach(function(lang) {
     var item = document.createElement('a');
