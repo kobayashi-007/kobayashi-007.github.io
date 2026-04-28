@@ -1843,3 +1843,59 @@ function showImageInModal(imageUrl) {
   modal.appendChild(img);
   document.body.appendChild(modal);
 }
+function toggleLangMenu() {
+  const langMenu = document.querySelector('#lang-switcher .back-menu-list-groups');
+  if (langMenu) {
+    langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+function switchLang(lang) {
+  const langMap = {
+    'zh': '',
+    'zh-CN': '',
+    'hk': '/hk',
+    'en': '/en',
+    'ja': '/ja',
+    'ko': '/ko',
+    'fr': '/fr',
+    'ru': '/ru',
+  };
+
+  const path = langMap[lang] || '';
+  const currentPath = window.location.pathname;
+  
+  let newPath = currentPath;
+  const langPrefixes = ['/en', '/ja', '/ko', '/fr', '/ru', '/hk'];
+  
+  let hasPrefix = false;
+  for (const prefix of langPrefixes) {
+    if (currentPath.startsWith(prefix)) {
+      newPath = currentPath.substring(prefix.length);
+      hasPrefix = true;
+      break;
+    }
+  }
+
+  if (!hasPrefix && currentPath !== '/' && path) {
+    newPath = path + currentPath;
+  } else if (path) {
+    newPath = path + newPath;
+  }
+
+  if (newPath === '') {
+    newPath = '/';
+  }
+
+  window.location.href = window.location.origin + newPath;
+}
+
+document.addEventListener('click', function(e) {
+  const langSwitcher = document.querySelector('#lang-switcher');
+  if (langSwitcher && !langSwitcher.contains(e.target)) {
+    const langMenu = document.querySelector('#lang-switcher .back-menu-list-groups');
+    if (langMenu) {
+      langMenu.style.display = 'none';
+    }
+  }
+});
