@@ -4,39 +4,6 @@
   
     
     <entry>
-      <title>我的世界服务器开发日记MiniMapDrawing插件</title>
-      <link href="/2026/01/17/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0%20No.1/"/>
-      <url>/2026/01/17/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0%20No.1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="MiniMapDrawing"><a href="#MiniMapDrawing" class="headerlink" title="MiniMapDrawing"></a>MiniMapDrawing</h1><p>跨区地图画插件（Paper 1.19 + Bungee 可配合）。本插件将普通地图转换为带作者信息的“地图画”，并支持作者在任意服务器复制自己的地图画（通过数据库保存物品数据）。</p><p><strong>要求</strong></p><ul><li>Java 17</li><li>Paper 1.19.x 服务器</li><li>MySQL 数据库</li><li><strong>运行时需要</strong> Vault 插件（以及支持的经济插件，如 EssentialsX、iConomy 等）—— 这些仅用于货币扣费，不是编译时依赖</li></ul><p><strong>项目结构（重要文件）</strong></p><ul><li><code>pom.xml</code> - Maven 构建</li><li><code>src/main/java/...</code> - 源代码</li><li><code>src/main/resources/config.yml</code> - 默认配置（数据库与花费）</li><li><code>src/main/resources/menu/</code> - GUI 配置文件（可在 <code>plugins/MiniMapDrawing/menu</code> 中修改）</li></ul><p><strong>快速构建</strong><br>运行以下命令打包 JAR：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure><p>构建成功后 JAR 位于 <code>target/MiniMapDrawing-1.0.0.jar</code>。</p><p><strong>安装&#x2F;部署</strong></p><ol><li>将构建出的 <code>MiniMapDrawing-*.jar</code> 放入各个 Paper 服务器的 <code>plugins/</code> 目录（需要运行插件功能的服务器）。</li><li>确保 <code>Vault</code> 与一个经济插件已安装并启用。</li><li>启动服务器，插件会在 <code>plugins/MiniMapDrawing/</code> 下生成配置与 <code>menu</code> 文件夹。</li><li>编辑 <code>plugins/MiniMapDrawing/config.yml</code> 来配置数据库连接与花费：</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">database:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">3306</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">minimapdrawing</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">useSSL:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">economy:</span></span><br><span class="line">  <span class="attr">conversion-cost:</span> <span class="number">500</span></span><br><span class="line">  <span class="attr">copy-cost:</span> <span class="number">50</span></span><br></pre></td></tr></table></figure><ol start="5"><li>如果需要自定义 GUI 文本或位置，可直接编辑 <code>plugins/MiniMapDrawing/menu/conversion.yml</code> 与 <code>plugins/MiniMapDrawing/menu/copy.yml</code>。</li></ol><p><strong>数据库初始化</strong><br>插件会在第一次连接时尝试自动创建表 <code>minimap_maps</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS minimap_maps (</span><br><span class="line">  id BIGINT AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line">  owner VARCHAR(64),</span><br><span class="line">  created_at DATETIME,</span><br><span class="line">  item LONGBLOB</span><br><span class="line">);</span><br></pre></td></tr></table></figure><p>确保提供的数据库用户有创建表与写入权限。</p><p><strong>编码问题（重要）</strong><br>如果在构建时出现“不可映射字符”或类似的编码错误，请确保项目使用 UTF-8 编码：</p><ul><li>已在 <code>pom.xml</code> 中把 <code>project.build.sourceEncoding</code> 设置为 <code>UTF-8</code> 并为资源与编译插件指定了编码。</li><li>在 IntelliJ 中：File → Settings → Editor → File Encodings，将 <strong>Project Encoding</strong> 和 <strong>Default encoding for properties files</strong> 都设置为 <code>UTF-8</code>（并把工作区文件也转换为 UTF-8）。</li><li>如果你在 Windows 下使用 Maven，确保 <code>JAVA_TOOL_OPTIONS</code> 或命令行没有强制覆盖文件编码；推荐将源码文件保存为 UTF-8 后重新运行 <code>mvn -U clean package</code>。</li></ul><p><strong>解决 Maven 依赖问题（常见）</strong><br>如果在 IntelliJ &#x2F; Maven 构建时遇到类似错误：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to execute goal on project: Could not resolve dependencies: mysql:mysql-connector-java:jar:8.1.0 ...</span><br></pre></td></tr></table></figure><ol><li>已在 <code>pom.xml</code> 中使用了稳定可用的 MySQL 驱动版本 <code>8.0.33</code>。若本地仍缓存旧失败记录，可用下列命令强制刷新依赖：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -U clean package</span><br></pre></td></tr></table></figure><ol start="2"><li>Vault API 通常不会托管在中央仓库。若 Maven 提示无法找到 <code>net.milkbowl.vault:VaultAPI:1.7</code>，请手动把 <code>Vault.jar</code> 安装到本地仓库（如果你在本地有 Vault 的 jar）：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file -Dfile=path/to/Vault.jar -DgroupId=net.milkbowl.vault -DartifactId=VaultAPI -Dversion=1.7 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></span><br></pre></td></tr></table></figure><p>将 <code>path/to/Vault.jar</code> 替换为你机器上 Vault 插件的实际路径。安装完成后再次运行 <code>mvn package</code> 即可。</p><ol start="3"><li>另一种做法是在 IDE 的 Maven 配置中勾选“Work offline”前先将依赖下载完成，或把 Vault 的 jar 放入本地仓库目录（不推荐手动拷贝，优先使用 <code>mvn install:install-file</code>）。</li></ol><p><strong>使用说明（简要）</strong></p><ul><li>手持普通地图（<code>minecraft:map</code> &#x2F; <code>filled_map</code>），按两次 Shift（双击 Shift）会打开“地图画转换”界面。按住 Shift 点击“确认转换”将消耗 <code>conversion-cost</code> 并把主手地图替换为带作者信息的地图画。</li><li>拿着已转换的地图画双击 Shift 会打开复制界面（只能复制自己的地图画）。在复制界面通过左右两侧按钮调整数量（最多 64），按住 Shift 点击确认来支付并获得复制品。</li></ul><p><strong>注意事项与扩展</strong></p><ul><li>菜单文件在 <code>plugins/MiniMapDrawing/menu</code> 下可直接编辑，修改后重启或重载插件生效。</li><li>物品序列化使用 Bukkit 序列化（<code>BukkitObjectOutputStream</code>），确保服务器之间 Bukkit 版本兼容以避免反序列化问题。</li><li>本插件仅保存物品数据到数据库，跨区复制依赖于每台服务器都能访问相同数据库与 Vault 经济环境。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 我的世界 </category>
-          
-          <category> MiniMapDrawing插件 </category>
-          
-          <category> 我的世界开发日记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 我的世界 </tag>
-            
-            <tag> MiniMapDrawing插件 </tag>
-            
-            <tag> 我的世界开发日记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hexo博客搭建系列 No.3 搭建Hexo博客 基础写作与管理 MarKdown</title>
       <link href="/2025/12/06/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E7%B3%BB%E5%88%97%20No.3/"/>
       <url>/2025/12/06/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E7%B3%BB%E5%88%97%20No.3/</url>
