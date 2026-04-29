@@ -1,4 +1,3 @@
-// 浏览器语言自动检测和跳转脚本
 (function() {
     var baseUrl = window.location.origin;
     
@@ -63,105 +62,6 @@
         return 'zh';
     }
 
-    function shouldRedirect() {
-        if (isLocalStorageAvailable()) {
-            var userChoice = localStorage.getItem(LANG_STORAGE_KEY);
-            if (userChoice) {
-                return false;
-            }
-        }
-        
-        var currentLang = getCurrentPageLang();
-        
-        if (currentLang !== 'zh') {
-            if (isLocalStorageAvailable()) {
-                localStorage.setItem(LANG_STORAGE_KEY, currentLang);
-            }
-            return false;
-        }
-        
-        return true;
-    }
-
-    function getBrowserLang() {
-        var lang;
-        var englishMatch = null;
-        
-        if (navigator.languages && navigator.languages.length) {
-            for (var i = 0; i < navigator.languages.length; i++) {
-                var browserLang = navigator.languages[i].toLowerCase();
-                if (langMap[browserLang]) {
-                    if (browserLang.startsWith('en')) {
-                        englishMatch = browserLang;
-                    } else {
-                        return browserLang;
-                    }
-                }
-                var langPrefix = browserLang.split('-')[0];
-                if (langMap[langPrefix]) {
-                    if (langPrefix === 'en') {
-                        englishMatch = langPrefix;
-                    } else {
-                        return langPrefix;
-                    }
-                }
-            }
-        }
-        
-        if (englishMatch) {
-            return englishMatch;
-        }
-        
-        if (navigator.language) {
-            lang = navigator.language.toLowerCase();
-            if (langMap[lang]) return lang;
-            var prefix = lang.split('-')[0];
-            if (langMap[prefix]) return prefix;
-        }
-        
-        if (navigator.userLanguage) {
-            lang = navigator.userLanguage.toLowerCase();
-            if (langMap[lang]) return lang;
-            var prefix = lang.split('-')[0];
-            if (langMap[prefix]) return prefix;
-        }
-        
-        return 'zh';
-    }
-
-    function isCurrentUrlTarget(targetUrl) {
-        var currentUrl = window.location.origin + window.location.pathname;
-        currentUrl = currentUrl.replace(/\/$/, '');
-        targetUrl = targetUrl.replace(/\/$/, '');
-        return currentUrl === targetUrl || currentUrl.startsWith(targetUrl + '/');
-    }
-
-    function doRedirect() {
-        if (!shouldRedirect()) {
-            return;
-        }
-        
-        var lang = getBrowserLang();
-        var targetUrl = langMap[lang];
-        
-        if (targetUrl) {
-            if (isCurrentUrlTarget(targetUrl)) {
-                if (isLocalStorageAvailable()) {
-                    localStorage.setItem(LANG_STORAGE_KEY, lang);
-                }
-                return;
-            }
-            
-            if (isLocalStorageAvailable()) {
-                localStorage.setItem(LANG_STORAGE_KEY, lang);
-            }
-            
-            setTimeout(function() {
-                window.location.href = targetUrl;
-            }, 500);
-        }
-    }
-
     window.saveLangChoice = function(lang) {
         if (isLocalStorageAvailable()) {
             localStorage.setItem(LANG_STORAGE_KEY, lang);
@@ -173,6 +73,4 @@
             localStorage.removeItem(LANG_STORAGE_KEY);
         }
     };
-
-    document.addEventListener('DOMContentLoaded', doRedirect);
 })();
