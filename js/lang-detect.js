@@ -1,4 +1,3 @@
-
 // 浏览器语言自动检测和跳转脚本
 (function() {
     // 定义语言映射表（统一不带尾斜杠）
@@ -28,12 +27,26 @@
     // 本地存储键名
     var LANG_STORAGE_KEY = 'user-lang-choice';
 
+    // 检查 localStorage 是否可用
+    function isLocalStorageAvailable() {
+        try {
+            var key = '__test_local_storage__';
+            localStorage.setItem(key, key);
+            localStorage.removeItem(key);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
     // 检查是否需要自动跳转
     function shouldRedirect() {
         // 如果用户已经选择过语言，不要自动跳转
-        var userChoice = localStorage.getItem(LANG_STORAGE_KEY);
-        if (userChoice) {
-            return false;
+        if (isLocalStorageAvailable()) {
+            var userChoice = localStorage.getItem(LANG_STORAGE_KEY);
+            if (userChoice) {
+                return false;
+            }
         }
         return true;
     }
@@ -41,14 +54,11 @@
     // 获取浏览器首选语言
     function getBrowserLang() {
         var lang;
-        var primaryMatch = null;
         var englishMatch = null;
         
-        // 尝试从 navigator.languages 获取（优先级最高）
         if (navigator.languages && navigator.languages.length) {
             for (var i = 0; i < navigator.languages.length; i++) {
                 var browserLang = navigator.languages[i].toLowerCase();
-                // 检查精确匹配
                 if (langMap[browserLang]) {
                     if (browserLang.startsWith('en')) {
                         englishMatch = browserLang;
@@ -56,7 +66,6 @@
                         return browserLang;
                     }
                 }
-                // 检查前缀匹配
                 var langPrefix = browserLang.split('-')[0];
                 if (langMap[langPrefix]) {
                     if (langPrefix === 'en') {
@@ -68,12 +77,10 @@
             }
         }
         
-        // 如果没有找到非英语匹配，返回英语匹配（如果有的话）
         if (englishMatch) {
             return englishMatch;
         }
         
-        // 尝试 navigator.language
         if (navigator.language) {
             lang = navigator.language.toLowerCase();
             if (langMap[lang]) return lang;
@@ -81,7 +88,6 @@
             if (langMap[prefix]) return prefix;
         }
         
-        // 尝试 navigator.userLanguage (IE)
         if (navigator.userLanguage) {
             lang = navigator.userLanguage.toLowerCase();
             if (langMap[lang]) return lang;
@@ -89,8 +95,15 @@
             if (langMap[prefix]) return prefix;
         }
         
-        // 默认返回简体中文
         return 'zh';
+    }
+
+    // 检查当前页面是否已经是目标语言版本
+    function isCurrentUrlTarget(targetUrl) {
+        var currentUrl = window.location.origin + window.location.pathname;
+        currentUrl = currentUrl.replace(/\/$/, '');
+        targetUrl = targetUrl.replace(/\/$/, '');
+        return currentUrl === targetUrl;
     }
 
     // 执行跳转
@@ -103,7 +116,20 @@
         var targetUrl = langMap[lang];
         
         if (targetUrl) {
-            // 延迟跳转，让用户看到页面
+            // 检查当前页面是否已经是目标语言版本，避免循环重定向
+            if (isCurrentUrlTarget(targetUrl)) {
+                // 如果已经在目标页面，保存语言选择以防止再次跳转
+                if (isLocalStorageAvailable()) {
+                    localStorage.setItem(LANG_STORAGE_KEY, lang);
+                }
+                return;
+            }
+            
+            // 在跳转前先保存语言选择
+            if (isLocalStorageAvailable()) {
+                localStorage.setItem(LANG_STORAGE_KEY, lang);
+            }
+            
             setTimeout(function() {
                 window.location.href = targetUrl;
             }, 500);
@@ -112,12 +138,16 @@
 
     // 保存用户语言选择
     window.saveLangChoice = function(lang) {
-        localStorage.setItem(LANG_STORAGE_KEY, lang);
+        if (isLocalStorageAvailable()) {
+            localStorage.setItem(LANG_STORAGE_KEY, lang);
+        }
     };
 
     // 重置语言选择（清除存储）
     window.resetLangChoice = function() {
-        localStorage.removeItem(LANG_STORAGE_KEY);
+        if (isLocalStorageAvailable()) {
+            localStorage.removeItem(LANG_STORAGE_KEY);
+        }
     };
 
     // 页面加载时执行
