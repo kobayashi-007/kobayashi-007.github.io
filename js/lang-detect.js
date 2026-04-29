@@ -24,6 +24,15 @@
         'ar-ye': 'https://blog.187322.xyz/ar'
     };
 
+    // URL 到语言代码的反向映射
+    var urlToLang = {
+        'https://blog.187322.xyz': 'zh',
+        'https://blog.187322.xyz/hk': 'hk',
+        'https://blog.187322.xyz/en': 'en',
+        'https://blog.187322.xyz/ja': 'ja',
+        'https://blog.187322.xyz/ar': 'ar'
+    };
+
     // 本地存储键名
     var LANG_STORAGE_KEY = 'user-lang-choice';
 
@@ -39,6 +48,27 @@
         }
     }
 
+    // 获取当前页面的语言代码
+    function getCurrentPageLang() {
+        var currentUrl = window.location.origin + window.location.pathname;
+        currentUrl = currentUrl.replace(/\/$/, '');
+        
+        // 检查精确匹配
+        if (urlToLang[currentUrl]) {
+            return urlToLang[currentUrl];
+        }
+        
+        // 检查路径前缀匹配（适用于子页面）
+        for (var url in urlToLang) {
+            if (currentUrl.startsWith(url + '/') || currentUrl === url) {
+                return urlToLang[url];
+            }
+        }
+        
+        // 默认返回中文
+        return 'zh';
+    }
+
     // 检查是否需要自动跳转
     function shouldRedirect() {
         // 如果用户已经选择过语言，不要自动跳转
@@ -48,6 +78,20 @@
                 return false;
             }
         }
+        
+        // 如果当前页面已经是一个有效的语言版本页面，不要自动跳转
+        // 这可以防止用户手动切换语言后又被自动跳转回去
+        var currentLang = getCurrentPageLang();
+        
+        // 如果当前不在主站（zh），说明用户可能是手动切换过来的，不自动跳转
+        if (currentLang !== 'zh') {
+            // 在非主站页面，保存当前语言作为用户选择，防止后续跳转
+            if (isLocalStorageAvailable()) {
+                localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+            }
+            return false;
+        }
+        
         return true;
     }
 
@@ -103,7 +147,7 @@
         var currentUrl = window.location.origin + window.location.pathname;
         currentUrl = currentUrl.replace(/\/$/, '');
         targetUrl = targetUrl.replace(/\/$/, '');
-        return currentUrl === targetUrl;
+        return currentUrl === targetUrl || currentUrl.startsWith(targetUrl + '/');
     }
 
     // 执行跳转
