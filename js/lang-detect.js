@@ -10,7 +10,19 @@
         'en': 'https://blog.187322.xyz/en',
         'ja': 'https://blog.187322.xyz/ja',
         'ar': 'https://blog.187322.xyz/ar',
-        'ar-SA': 'https://blog.187322.xyz/ar'
+        'ar-sa': 'https://blog.187322.xyz/ar',
+        'ar-eg': 'https://blog.187322.xyz/ar',
+        'ar-ae': 'https://blog.187322.xyz/ar',
+        'ar-iq': 'https://blog.187322.xyz/ar',
+        'ar-jo': 'https://blog.187322.xyz/ar',
+        'ar-kw': 'https://blog.187322.xyz/ar',
+        'ar-lb': 'https://blog.187322.xyz/ar',
+        'ar-ma': 'https://blog.187322.xyz/ar',
+        'ar-om': 'https://blog.187322.xyz/ar',
+        'ar-qa': 'https://blog.187322.xyz/ar',
+        'ar-sy': 'https://blog.187322.xyz/ar',
+        'ar-tn': 'https://blog.187322.xyz/ar',
+        'ar-ye': 'https://blog.187322.xyz/ar'
     };
 
     // 本地存储键名
@@ -29,21 +41,36 @@
     // 获取浏览器首选语言
     function getBrowserLang() {
         var lang;
+        var primaryMatch = null;
+        var englishMatch = null;
         
         // 尝试从 navigator.languages 获取（优先级最高）
-        if (navigator.languages &amp;&amp; navigator.languages.length) {
-            for (var i = 0; i &lt; navigator.languages.length; i++) {
+        if (navigator.languages && navigator.languages.length) {
+            for (var i = 0; i < navigator.languages.length; i++) {
                 var browserLang = navigator.languages[i].toLowerCase();
                 // 检查精确匹配
                 if (langMap[browserLang]) {
-                    return browserLang;
+                    if (browserLang.startsWith('en')) {
+                        englishMatch = browserLang;
+                    } else {
+                        return browserLang;
+                    }
                 }
                 // 检查前缀匹配
                 var langPrefix = browserLang.split('-')[0];
                 if (langMap[langPrefix]) {
-                    return langPrefix;
+                    if (langPrefix === 'en') {
+                        englishMatch = langPrefix;
+                    } else {
+                        return langPrefix;
+                    }
                 }
             }
+        }
+        
+        // 如果没有找到非英语匹配，返回英语匹配（如果有的话）
+        if (englishMatch) {
+            return englishMatch;
         }
         
         // 尝试 navigator.language
