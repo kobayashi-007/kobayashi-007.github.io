@@ -1924,13 +1924,14 @@ function toggleLangMenu() {
 }
 
 function switchLang(lang) {
+  const baseUrl = window.location.origin;
   const langMap = {
-    'zh': 'https://blog.187322.xyz',
-    'zh-CN': 'https://blog.187322.xyz',
-    'hk': 'https://blog.187322.xyz/hk',
-    'en': 'https://blog.187322.xyz/en',
-    'ja': 'https://blog.187322.xyz/ja',
-    'ar': 'https://blog.187322.xyz/ar',
+    'zh': baseUrl,
+    'zh-CN': baseUrl,
+    'hk': baseUrl + '/hk',
+    'en': baseUrl + '/en',
+    'ja': baseUrl + '/ja',
+    'ar': baseUrl + '/ar',
   };
 
   const targetUrl = langMap[lang] || '';
