@@ -92,17 +92,6 @@
             return false;
         }
         
-        // 如果当前已经是主站（zh），检查浏览器语言是否也是中文
-        // 如果浏览器语言不是中文且用户未选择过语言，则需要跳转
-        var browserLang = getBrowserLang();
-        if (browserLang === 'zh' || browserLang === 'zh-CN') {
-            // 浏览器语言已是中文，无需跳转
-            if (isLocalStorageAvailable()) {
-                localStorage.setItem(LANG_STORAGE_KEY, 'zh');
-            }
-            return false;
-        }
-        
         return true;
     }
 
