@@ -35,9 +35,9 @@ function createLangSwitcher() {
   var menuList = document.createElement('div');
   menuList.className = 'back-menu-list lang-list';
   
-  var langList = ['zh', 'hk', 'en', 'ja'];
-  var langNames = { 'zh':'简体中文','hk':'繁體中文','en':'English','ja':'日本語' };
-  var langGlyph = { 'zh':'简','hk':'繁','en':'EN','ja':'日' };
+  var langList = ['zh', 'hk', 'en', 'ja', 'ar'];
+  var langNames = { 'zh':'简体中文','hk':'繁體中文','en':'English','ja':'日本語','ar':'العربية' };
+  var langGlyph = { 'zh':'简','hk':'繁','en':'EN','ja':'日','ar':'ع' };
   
   langList.forEach(function(lang) {
     var item = document.createElement('a');
@@ -1930,6 +1930,7 @@ function switchLang(lang) {
     'hk': 'https://blog.187322.xyz/hk',
     'en': 'https://blog.187322.xyz/en',
     'ja': 'https://blog.187322.xyz/ja',
+    'ar': 'https://blog.187322.xyz/ar',
   };
 
   const targetUrl = langMap[lang] || '';

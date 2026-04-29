@@ -8,7 +8,9 @@
         'zh-HK': 'https://blog.187322.xyz/hk',
         'zh-TW': 'https://blog.187322.xyz/hk',
         'en': 'https://blog.187322.xyz/en',
-        'ja': 'https://blog.187322.xyz/ja'
+        'ja': 'https://blog.187322.xyz/ja',
+        'ar': 'https://blog.187322.xyz/ar',
+        'ar-SA': 'https://blog.187322.xyz/ar'
     };
 
     // 本地存储键名
