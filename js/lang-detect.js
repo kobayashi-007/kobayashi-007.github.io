@@ -1,39 +1,36 @@
 // 浏览器语言自动检测和跳转脚本
 (function() {
-    // 获取当前网站的基础 URL（自动适应部署域名）
-    var baseUrl = window.location.origin;
-    
-    // 定义语言映射表（使用相对路径）
+    // 定义语言映射表（统一不带尾斜杠）
     var langMap = {
-        'zh': baseUrl,
-        'zh-CN': baseUrl,
-        'zh-HK': baseUrl + '/hk',
-        'zh-TW': baseUrl + '/hk',
-        'en': baseUrl + '/en',
-        'ja': baseUrl + '/ja',
-        'ar': baseUrl + '/ar',
-        'ar-sa': baseUrl + '/ar',
-        'ar-eg': baseUrl + '/ar',
-        'ar-ae': baseUrl + '/ar',
-        'ar-iq': baseUrl + '/ar',
-        'ar-jo': baseUrl + '/ar',
-        'ar-kw': baseUrl + '/ar',
-        'ar-lb': baseUrl + '/ar',
-        'ar-ma': baseUrl + '/ar',
-        'ar-om': baseUrl + '/ar',
-        'ar-qa': baseUrl + '/ar',
-        'ar-sy': baseUrl + '/ar',
-        'ar-tn': baseUrl + '/ar',
-        'ar-ye': baseUrl + '/ar'
+        'zh': 'https://blog.187322.xyz',
+        'zh-CN': 'https://blog.187322.xyz',
+        'zh-HK': 'https://blog.187322.xyz/hk',
+        'zh-TW': 'https://blog.187322.xyz/hk',
+        'en': 'https://blog.187322.xyz/en',
+        'ja': 'https://blog.187322.xyz/ja',
+        'ar': 'https://blog.187322.xyz/ar',
+        'ar-sa': 'https://blog.187322.xyz/ar',
+        'ar-eg': 'https://blog.187322.xyz/ar',
+        'ar-ae': 'https://blog.187322.xyz/ar',
+        'ar-iq': 'https://blog.187322.xyz/ar',
+        'ar-jo': 'https://blog.187322.xyz/ar',
+        'ar-kw': 'https://blog.187322.xyz/ar',
+        'ar-lb': 'https://blog.187322.xyz/ar',
+        'ar-ma': 'https://blog.187322.xyz/ar',
+        'ar-om': 'https://blog.187322.xyz/ar',
+        'ar-qa': 'https://blog.187322.xyz/ar',
+        'ar-sy': 'https://blog.187322.xyz/ar',
+        'ar-tn': 'https://blog.187322.xyz/ar',
+        'ar-ye': 'https://blog.187322.xyz/ar'
     };
 
     // URL 到语言代码的反向映射
     var urlToLang = {
-        [baseUrl]: 'zh',
-        [baseUrl + '/hk']: 'hk',
-        [baseUrl + '/en']: 'en',
-        [baseUrl + '/ja']: 'ja',
-        [baseUrl + '/ar']: 'ar'
+        'https://blog.187322.xyz': 'zh',
+        'https://blog.187322.xyz/hk': 'hk',
+        'https://blog.187322.xyz/en': 'en',
+        'https://blog.187322.xyz/ja': 'ja',
+        'https://blog.187322.xyz/ar': 'ar'
     };
 
     // 本地存储键名
@@ -91,6 +88,17 @@
             // 在非主站页面，保存当前语言作为用户选择，防止后续跳转
             if (isLocalStorageAvailable()) {
                 localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+            }
+            return false;
+        }
+        
+        // 如果当前已经是主站（zh），检查浏览器语言是否也是中文
+        // 如果浏览器语言不是中文且用户未选择过语言，则需要跳转
+        var browserLang = getBrowserLang();
+        if (browserLang === 'zh' || browserLang === 'zh-CN') {
+            // 浏览器语言已是中文，无需跳转
+            if (isLocalStorageAvailable()) {
+                localStorage.setItem(LANG_STORAGE_KEY, 'zh');
             }
             return false;
         }
