@@ -333,6 +333,13 @@
   </url>
   
   <url>
+    <loc>https://kobayashi-007.github.io/en/tags/Website-Building/</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://kobayashi-007.github.io/en/tags/Reprint/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -348,13 +355,6 @@
   
   <url>
     <loc>https://kobayashi-007.github.io/en/tags/Office/</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://kobayashi-007.github.io/en/tags/Website-Building/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -391,14 +391,14 @@
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/en/categories/Introduction-to-PySpark-Development/</loc>
+    <loc>https://kobayashi-007.github.io/en/categories/Hexo-Blog/Domain-Purchase/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/en/categories/Image-Hosting/</loc>
+    <loc>https://kobayashi-007.github.io/en/categories/Introduction-to-PySpark-Development/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -419,7 +419,7 @@
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/en/categories/Hexo-Blog/Domain-Purchase/</loc>
+    <loc>https://kobayashi-007.github.io/en/categories/Image-Hosting/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
