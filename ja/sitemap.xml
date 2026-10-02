@@ -333,13 +333,6 @@
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/tags/%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88%E6%A7%8B%E7%AF%89/</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://kobayashi-007.github.io/tags/%E8%BB%A2%E8%BC%89/</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -347,14 +340,7 @@
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/tags/%E6%AD%A3%E8%A6%8F%E7%89%88Office%E3%83%95%E3%82%A1%E3%83%9F%E3%83%AA%E3%83%BC%E6%B0%B8%E4%B9%85%E7%84%A1%E6%96%99/</loc>
-    <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://kobayashi-007.github.io/tags/Office/</loc>
+    <loc>https://kobayashi-007.github.io/tags/%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88%E6%A7%8B%E7%AF%89/</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -388,6 +374,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://kobayashi-007.github.io/tags/%E6%AD%A3%E8%A6%8F%E7%89%88Office%E3%83%95%E3%82%A1%E3%83%9F%E3%83%AA%E3%83%BC%E6%B0%B8%E4%B9%85%E7%84%A1%E6%96%99/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://kobayashi-007.github.io/tags/Office/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -398,14 +398,14 @@
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/categories/Hexo%E3%83%96%E3%83%AD%E3%82%B0/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E8%B3%BC%E5%85%A5/</loc>
+    <loc>https://kobayashi-007.github.io/categories/PySpark%E9%96%8B%E7%99%BA%E5%85%A5%E9%96%80/</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://kobayashi-007.github.io/categories/PySpark%E9%96%8B%E7%99%BA%E5%85%A5%E9%96%80/</loc>
+    <loc>https://kobayashi-007.github.io/categories/Hexo%E3%83%96%E3%83%AD%E3%82%B0/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E8%B3%BC%E5%85%A5/</loc>
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
